@@ -31,14 +31,21 @@ const testObj = {
 
 // testObj.name = 'test2'
 
-
-function generic<T extends number | boolean>(params: T) {
+function generic1<T extends number | boolean>(params: T) {
     type res = T extends number ? number : boolean
     return !params
 }
 
-generic<3>(3)
-generic<true>(true)
+generic1<3>(3)
+generic1<true>(true)
+
+function generic<T>(params: T extends number ? boolean : number) {
+    type res = T extends number ? number : boolean
+    return !params
+}
+
+generic<3>(true)
+generic<true>(3)
 
 type ExtractReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
 
